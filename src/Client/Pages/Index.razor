@@ -1,0 +1,27 @@
+﻿@page "/"
+
+
+<PageTitle>Snake Eyes</PageTitle>
+<h1>Snake Eyes</h1>
+
+<div>
+    <Dice Pips="@_game.Eye1"/>
+    <Dice Pips="@_game.Eye2"/>
+</div>
+<p>@_game.Total</p>
+<button @onclick="@_game.Play" disabled="@_game.HasSnakeEyes">Play</button>
+<h2>Highscores</h2>
+<ul>
+    @foreach(var item in _game.Highscores.OrderByDescending(e=>e))
+    {
+        <li>@item</li>
+    }
+</ul>
+
+@if (_game.HasSnakeEyes)
+{
+    <div class="alert alert-primary" role="alert">
+        Oeps you did it again!
+    </div>
+    <button @onclick="@_game.Restart">Restart</button>
+}
